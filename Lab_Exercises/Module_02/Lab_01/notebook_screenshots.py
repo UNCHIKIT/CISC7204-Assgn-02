@@ -21,7 +21,7 @@ OUTPUT_FOLDER = Path("screenshots")
 # Set to "" to use the notebook's own filename instead.
 # (If you process several notebooks at once, use "" so files don't
 #  overwrite each other.)
-OUTPUT_PREFIX = "Mod01_L1"
+OUTPUT_PREFIX = "Mod02_L1"
 
 # Screenshots start at the first Markdown heading containing this text
 # (case-insensitive). Everything before it is skipped.
