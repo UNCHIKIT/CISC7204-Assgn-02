@@ -1,0 +1,457 @@
+{
+ "n_total": 72087,
+ "n_waves": 35,
+ "waves": [
+  1972,
+  1973,
+  1974,
+  1975,
+  1976,
+  1977,
+  1978,
+  1980,
+  1982,
+  1983,
+  1984,
+  1985,
+  1986,
+  1987,
+  1988,
+  1989,
+  1990,
+  1991,
+  1993,
+  1994,
+  1996,
+  1998,
+  2000,
+  2002,
+  2004,
+  2006,
+  2008,
+  2010,
+  2012,
+  2014,
+  2016,
+  2018,
+  2021,
+  2022,
+  2024
+ ],
+ "status_n": {
+  "married": 37137,
+  "widowed": 6651,
+  "divorced": 9523,
+  "separated": 2416,
+  "never married": 16360
+ },
+ "pct_very_happy": {
+  "married": 38.8,
+  "widowed": 22.733,
+  "divorced": 18.566,
+  "separated": 15.522,
+  "never married": 19.59
+ },
+ "mean_h": {
+  "married": 2.3037,
+  "widowed": 2.0195,
+  "divorced": 1.9741,
+  "separated": 1.863,
+  "never married": 2.0018
+ },
+ "ci95": {
+  "married": 0.0063,
+  "widowed": 0.0158,
+  "divorced": 0.0126,
+  "separated": 0.0261,
+  "never married": 0.0096
+ },
+ "chi2": 4513.74,
+ "dof": 8,
+ "p": 0.0,
+ "cramers_v": 0.1769,
+ "ols_unadj": {
+  "widowed": -0.2842,
+  "divorced": -0.3297,
+  "separated": -0.4407,
+  "never married": -0.3019
+ },
+ "ols_unadj_p": {
+  "widowed": 3.5537903696932905e-253,
+  "divorced": 0.0,
+  "separated": 5.0027082492193824e-245,
+  "never married": 0.0
+ },
+ "ols_rsq": 0.0614,
+ "ols_adj": {
+  "widowed": -0.2483,
+  "divorced": -0.292,
+  "separated": -0.4006,
+  "never married": -0.2525
+ },
+ "ols_adj_p": {
+  "widowed": 6.707494828200255e-133,
+  "divorced": 0.0,
+  "separated": 7.563264817509718e-182,
+  "never married": 8.352157372283095e-305
+ },
+ "ols_adj_rsq": 0.0705,
+ "n_adj": 64321,
+ "cohen_d": 0.4878,
+ "odds_ratio": 2.6022,
+ "or_ci": [
+  2.4904,
+  2.7189
+ ],
+ "boot_gap_ci": [
+  18.4532,
+  19.9779
+ ],
+ "gap_pp": 19.2091,
+ "decades": [
+  {
+   "decade": "1970s",
+   "n": 10613,
+   "married_pct": 40.612,
+   "separated_pct": 17.665,
+   "gap_pp": 22.947,
+   "p": 4.21487462655983e-118
+  },
+  {
+   "decade": "1980s",
+   "n": 14085,
+   "married_pct": 38.871,
+   "separated_pct": 15.741,
+   "gap_pp": 23.13,
+   "p": 5.425770784240583e-139
+  },
+  {
+   "decade": "1990s",
+   "n": 13131,
+   "married_pct": 40.697,
+   "separated_pct": 14.679,
+   "gap_pp": 26.018,
+   "p": 6.156084521195901e-187
+  },
+  {
+   "decade": "2000s",
+   "n": 10477,
+   "married_pct": 42.273,
+   "separated_pct": 16.138,
+   "gap_pp": 26.135,
+   "p": 1.476383153308629e-157
+  },
+  {
+   "decade": "2010s",
+   "n": 11728,
+   "married_pct": 40.51,
+   "separated_pct": 18.088,
+   "gap_pp": 22.422,
+   "p": 1.0858727271431776e-165
+  },
+  {
+   "decade": "2020s",
+   "n": 12053,
+   "married_pct": 29.083,
+   "separated_pct": 10.557,
+   "gap_pp": 18.526,
+   "p": 6.915293546700125e-162
+  }
+ ],
+ "binary": {
+  "chi2": 4307.1712,
+  "dof": 2,
+  "p": 0.0,
+  "cramers_v": 0.2444,
+  "odds_ratio": 2.596,
+  "or_ci": [
+   2.5101,
+   2.6848
+  ]
+ },
+ "holdout": {
+  "train_r2": 0.0609,
+  "test_r2": 0.063
+ },
+ "yearly": [
+  {
+   "year": 1972,
+   "n": 1606,
+   "pct_very_happy": 30.262,
+   "share_married": 72.042,
+   "gdp": 26798.5336
+  },
+  {
+   "year": 1973,
+   "n": 1500,
+   "pct_very_happy": 35.867,
+   "share_married": 71.6,
+   "gdp": 28042.5519
+  },
+  {
+   "year": 1974,
+   "n": 1480,
+   "pct_very_happy": 37.905,
+   "share_married": 71.892,
+   "gdp": 27637.2998
+  },
+  {
+   "year": 1975,
+   "n": 1485,
+   "pct_very_happy": 32.862,
+   "share_married": 67.205,
+   "gdp": 27309.8688
+  },
+  {
+   "year": 1976,
+   "n": 1499,
+   "pct_very_happy": 34.089,
+   "share_married": 64.977,
+   "gdp": 28509.1431
+  },
+  {
+   "year": 1977,
+   "n": 1527,
+   "pct_very_happy": 34.84,
+   "share_married": 63.785,
+   "gdp": 29528.9664
+  },
+  {
+   "year": 1978,
+   "n": 1516,
+   "pct_very_happy": 34.367,
+   "share_married": 62.929,
+   "gdp": 30834.9992
+  },
+  {
+   "year": 1980,
+   "n": 1462,
+   "pct_very_happy": 33.926,
+   "share_married": 60.602,
+   "gdp": 31081.6216
+  },
+  {
+   "year": 1982,
+   "n": 1855,
+   "pct_very_happy": 30.566,
+   "share_married": 53.477,
+   "gdp": 30696.0834
+  },
+  {
+   "year": 1983,
+   "n": 1573,
+   "pct_very_happy": 31.151,
+   "share_married": 60.903,
+   "gdp": 31810.9216
+  },
+  {
+   "year": 1984,
+   "n": 1445,
+   "pct_very_happy": 34.74,
+   "share_married": 56.332,
+   "gdp": 33818.8236
+  },
+  {
+   "year": 1985,
+   "n": 1530,
+   "pct_very_happy": 28.627,
+   "share_married": 56.863,
+   "gdp": 34918.1302
+  },
+  {
+   "year": 1986,
+   "n": 1449,
+   "pct_very_happy": 32.298,
+   "share_married": 56.591,
+   "gdp": 35794.8878
+  },
+  {
+   "year": 1987,
+   "n": 1779,
+   "pct_very_happy": 29.117,
+   "share_married": 50.59,
+   "gdp": 36701.9454
+  },
+  {
+   "year": 1988,
+   "n": 1466,
+   "pct_very_happy": 33.97,
+   "share_married": 53.547,
+   "gdp": 37889.3773
+  },
+  {
+   "year": 1989,
+   "n": 1526,
+   "pct_very_happy": 32.634,
+   "share_married": 55.177,
+   "gdp": 38911.5419
+  },
+  {
+   "year": 1990,
+   "n": 1360,
+   "pct_very_happy": 33.456,
+   "share_married": 53.015,
+   "gdp": 39200.0658
+  },
+  {
+   "year": 1991,
+   "n": 1504,
+   "pct_very_happy": 31.051,
+   "share_married": 53.191,
+   "gdp": 38637.8398
+  },
+  {
+   "year": 1993,
+   "n": 1600,
+   "pct_very_happy": 31.562,
+   "share_married": 53.562,
+   "gdp": 40002.4762
+  },
+  {
+   "year": 1994,
+   "n": 2977,
+   "pct_very_happy": 28.787,
+   "share_married": 51.562,
+   "gdp": 41106.9882
+  },
+  {
+   "year": 1996,
+   "n": 2885,
+   "pct_very_happy": 30.399,
+   "share_married": 47.903,
+   "gdp": 42783.8166
+  },
+  {
+   "year": 1998,
+   "n": 2805,
+   "pct_very_happy": 31.765,
+   "share_married": 47.665,
+   "gdp": 45596.4307
+  },
+  {
+   "year": 2000,
+   "n": 2776,
+   "pct_very_happy": 31.736,
+   "share_married": 45.821,
+   "gdp": 48616.2546
+  },
+  {
+   "year": 2002,
+   "n": 1369,
+   "pct_very_happy": 30.314,
+   "share_married": 44.12,
+   "gdp": 48967.3661
+  },
+  {
+   "year": 2004,
+   "n": 1337,
+   "pct_very_happy": 31.339,
+   "share_married": 50.785,
+   "gdp": 51348.3473
+  },
+  {
+   "year": 2006,
+   "n": 2985,
+   "pct_very_happy": 30.787,
+   "share_married": 47.337,
+   "gdp": 53596.3152
+  },
+  {
+   "year": 2008,
+   "n": 2010,
+   "pct_very_happy": 29.701,
+   "share_married": 48.209,
+   "gdp": 53703.9629
+  },
+  {
+   "year": 2010,
+   "n": 2038,
+   "pct_very_happy": 26.398,
+   "share_married": 43.474,
+   "gdp": 52812.683
+  },
+  {
+   "year": 2012,
+   "n": 1964,
+   "pct_very_happy": 30.193,
+   "share_married": 45.672,
+   "gdp": 54000.8411
+  },
+  {
+   "year": 2014,
+   "n": 2526,
+   "pct_very_happy": 31.077,
+   "share_married": 45.685,
+   "gdp": 55665.2411
+  },
+  {
+   "year": 2016,
+   "n": 2858,
+   "pct_very_happy": 28.202,
+   "share_married": 42.267,
+   "gdp": 57430.8499
+  },
+  {
+   "year": 2018,
+   "n": 2342,
+   "pct_very_happy": 29.889,
+   "share_married": 42.57,
+   "gdp": 59817.6557
+  },
+  {
+   "year": 2021,
+   "n": 4006,
+   "pct_very_happy": 19.521,
+   "share_married": 49.675,
+   "gdp": 63096.7856
+  },
+  {
+   "year": 2022,
+   "n": 4107,
+   "pct_very_happy": 21.329,
+   "share_married": 42.05,
+   "gdp": 64322.2333
+  },
+  {
+   "year": 2024,
+   "n": 3940,
+   "pct_very_happy": 20.152,
+   "share_married": 41.802,
+   "gdp": 66856.5132
+  }
+ ],
+ "share_married_first": {
+  "year": 1972,
+  "value": 72.042
+ },
+ "share_married_last": {
+  "year": 2024,
+  "value": 41.802
+ },
+ "pct_vh_first": {
+  "year": 1972,
+  "value": 30.262
+ },
+ "pct_vh_last": {
+  "year": 2024,
+  "value": 20.152
+ },
+ "gdp_first": {
+  "year": 1972,
+  "value": 26798.5336
+ },
+ "gdp_last": {
+  "year": 2024,
+  "value": 66856.5132
+ },
+ "gdp_ratio": 2.4948,
+ "tau_pre2022": -0.5038,
+ "tau_pre2022_p": 1.7978984791029803e-05,
+ "era_chi2": 770.7347,
+ "era_dof": 4,
+ "era_p": 1.6752546078924053e-165,
+ "rho_share": 0.6894,
+ "rho_share_p": 4.6546107412287524e-06,
+ "rho_gdp": -0.684,
+ "rho_gdp_p": 5.888585376799201e-06
+}
