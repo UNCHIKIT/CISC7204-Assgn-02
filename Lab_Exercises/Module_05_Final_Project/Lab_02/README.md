@@ -1,6 +1,6 @@
 # Module 05 Final Project - Lab 02: Creating Dashboard using Plotly and Dash
 
-UN CHI KIT (mc65308), CISC7204 Assignment 02.
+CISC7204 Assignment 02.
 
 Completed from the course skeleton `DV0101EN-Final-Assign-Part-2-Questions.py`.
 The skeleton is kept next to the finished app so the work is auditable.
@@ -9,7 +9,7 @@ The skeleton is kept next to the finished app so the work is auditable.
 
 | file | role |
 |---|---|
-| `CISC7204 Assgn02 Module 05Final - Lab02 mc65308 UN CHI KIT.py` | the finished Dash application |
+| `CISC7204 Assgn02 Module 05Final - Lab02.py` | the finished Dash application |
 | `DV0101EN-Final-Assign-Part-2-Questions.py` | the original skeleton with TASK 2.1-2.6 prompts |
 | `automobile-sales.csv` | the dataset, so the project space runs offline |
 | `Screenshots/` | evidence of both report modes |
@@ -19,7 +19,7 @@ The skeleton is kept next to the finished app so the work is auditable.
 
 ```
 pip install -r requirements.txt
-python "CISC7204 Assgn02 Module 05Final - Lab02 mc65308 UN CHI KIT.py"
+python "CISC7204 Assgn02 Module 05Final - Lab02.py"
 ```
 
 Then open http://127.0.0.1:8050 .

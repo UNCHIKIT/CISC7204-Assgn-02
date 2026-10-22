@@ -322,7 +322,7 @@ async def main():
     # Find notebooks in this folder only, not nested folders.
     notebooks = sorted(
         path
-        for path in NOTEBOOK_FOLDER.glob("CISC7204 Assgn02 Module 05Practice *.ipynb")
+        for path in NOTEBOOK_FOLDER.glob("CISC7204 Assgn02 Module 05Practice - Lab01.ipynb")
         if path.is_file()
     )
 

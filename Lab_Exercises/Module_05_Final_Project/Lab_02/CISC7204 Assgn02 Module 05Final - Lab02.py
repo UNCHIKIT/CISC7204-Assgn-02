@@ -4,10 +4,8 @@
 
 Completed from the course skeleton `DV0101EN-Final-Assign-Part-2-Questions.py`.
 
-    python "CISC7204 Assgn02 Module 05Final - Lab02 mc65308 UN CHI KIT.py"
+    python "CISC7204 Assgn02 Module 05Final - Lab02.py"
     # then open http://127.0.0.1:8050
-
-Author: UN CHI KIT (mc65308)
 """
 from pathlib import Path
 

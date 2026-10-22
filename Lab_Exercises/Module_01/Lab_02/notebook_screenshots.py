@@ -326,7 +326,7 @@ async def main():
     notebooks = sorted(
         path
         for path in NOTEBOOK_FOLDER.glob(
-            "CISC7204 Assgn02 Module 01 - Lab02 mc65308 UN CHI KIT.ipynb"
+            "CISC7204 Assgn02 Module 01 - Lab02.ipynb"
         )
         if path.is_file()
     )
