@@ -18,8 +18,8 @@ Lab03 K
 Lab04 K
 
 Module 05 Practice Project
-Lab01 J
-Lab02 K
+Lab01 K
+Lab02 J
 
 Module 05 FInal Project
 Lab01 K
