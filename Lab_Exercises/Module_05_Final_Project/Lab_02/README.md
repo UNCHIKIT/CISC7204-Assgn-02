@@ -2,15 +2,13 @@
 
 CISC7204 Assignment 02.
 
-Completed from the course skeleton `DV0101EN-Final-Assign-Part-2-Questions.py`.
-The skeleton is kept next to the finished app so the work is auditable.
+Completed from the course skeleton `DV0101EN-Final-Assign-Part-2-Questions.py` (TASK 2.1-2.6).
 
 ## Files
 
 | file | role |
 |---|---|
 | `CISC7204 Assgn02 Module 05Final - Lab02.py` | the finished Dash application |
-| `DV0101EN-Final-Assign-Part-2-Questions.py` | the original skeleton with TASK 2.1-2.6 prompts |
 | `automobile-sales.csv` | the dataset, so the project space runs offline |
 | `Screenshots/` | evidence of both report modes |
 | `requirements.txt` | dependencies |

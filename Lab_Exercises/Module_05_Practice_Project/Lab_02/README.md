@@ -1,7 +1,7 @@
 # Module 05 Practice Project - Lab 02: Creating Dashboards
 
-`Dash_wildfire.py` - the regional wildfire dashboard built from the course skeleton in
-`Practice_Assignment_Part2.md` (TASK 2.1 - 2.5).
+`Dash_wildfire.py` - the regional wildfire dashboard built from the course skeleton
+(`Practice_Assignment_Part2.md`, TASK 2.1 - 2.5).
 
 ## Run
 
@@ -17,7 +17,6 @@ Then open http://127.0.0.1:8050 .
 | file | role |
 |---|---|
 | `CISC7204 Assgn02 Module 05Practice - Lab02.py` | the dashboard application |
-| `Practice_Assignment_Part2.md` | the course instructions the app was built from |
 | `Historical_Wildfires.csv` | dataset, so the project space runs offline |
 | `Screenshots/` | evidence for two region/year combinations |
 | `requirements.txt` | dependencies |
