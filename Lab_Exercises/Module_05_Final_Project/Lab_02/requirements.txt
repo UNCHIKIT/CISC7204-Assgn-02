@@ -1,0 +1,4 @@
+dash>=2.0
+more-itertools
+pandas
+plotly
