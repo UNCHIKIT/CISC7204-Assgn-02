@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Does marriage buy happiness? - GSS 1972-2024</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<style>
+  :root { --ink:#222; --muted:#666; --line:#e3e3e3; --red:#c1121f; --navy:#003049; --teal:#2a9d8f; --sand:#e9c46a; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:#fbfbfb; line-height:1.45; }
+  header { padding:28px 32px 18px; background:#fff; border-bottom:1px solid var(--line); }
+  header h1 { margin:0 0 6px; font-size:26px; letter-spacing:-0.2px; }
+  header p { margin:2px 0; color:var(--muted); font-size:14px; }
+  .chips { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 2px; }
+  .chip { background:#f4f6f7; border:1px solid var(--line); border-radius:8px; padding:8px 12px; min-width:130px; }
+  .chip b { display:block; font-size:18px; font-variant-numeric: tabular-nums; }
+  .chip span { font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+  main { max-width:1180px; margin:0 auto; padding:8px 24px 60px; }
+  section { background:#fff; border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:20px 0; }
+  section h2 { font-size:17px; margin:0 0 4px; }
+  section p.lede { margin:0 0 10px; color:var(--muted); font-size:13.5px; }
+  .chart { width:100%; height:420px; }
+  .chart.tall { height:470px; }
+  .controls { display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin:6px 0 12px; font-size:13px; }
+  .controls label { display:flex; gap:6px; align-items:center; cursor:pointer; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th, td { text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; }
+  td.num { text-align:right; font-variant-numeric: tabular-nums; }
+  .note { font-size:12.5px; color:var(--muted); margin-top:10px; }
+  .warn { background:#fff8e6; border:1px solid #f0d9a0; border-radius:8px; padding:12px 14px; font-size:13px; margin-top:14px; }
+  footer { max-width:1180px; margin:0 auto 40px; padding:0 24px; color:var(--muted); font-size:12.5px; }
+  code { background:#f2f4f5; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .figlinks a { color:var(--navy); margin-right:14px; font-size:12.5px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Does marriage buy happiness?</h1>
+  <p>GSS 1972&ndash;2024 &middot; revised pair project ideation for CISC7204 Assignment 02</p>
+  <p>UN CHI KIT (mc65308) &middot; Kelden Jamtsho (mc66418)</p>
+  <div class="chips" id="chips"></div>
+</header>
+
+<main>
+  <section>
+    <h2>1 &middot; Married adults report more happiness than any other status</h2>
+    <p class="lede">Share saying they are &ldquo;very happy&rdquo;, pooled across every GSS wave, with a 95% confidence interval.</p>
+    <div id="p1" class="chart"></div>
+    <p class="note" id="n1"></p>
+  </section>
+
+  <section>
+    <h2>2 &middot; Marriage and happiness fell together</h2>
+    <p class="lede">Both series come from the same respondents, so &ldquo;married&rdquo; means the same thing twice. Choose what the right-hand axis shows.</p>
+    <div class="controls">
+      <label><input type="radio" name="rightaxis" value="share" checked> Right axis: share married</label>
+      <label><input type="radio" name="rightaxis" value="gdp"> Right axis: GDP per capita</label>
+      <label><input type="checkbox" id="exclude"> Exclude the 2021&ndash;2024 waves</label>
+    </div>
+    <div id="p2" class="chart"></div>
+    <p class="note" id="n2"></p>
+  </section>
+
+  <section>
+    <h2>3 &middot; The married&ndash;separated gap holds in every decade</h2>
+    <p class="lede">Percentage of respondents saying they are &ldquo;very happy&rdquo;, by decade of interview.</p>
+    <div id="p3" class="chart"></div>
+    <p class="note" id="n3"></p>
+  </section>
+
+  <section>
+    <h2>4 &middot; Across waves, the two national series move together</h2>
+    <p class="lede">One point per survey wave; the line is an ordinary least squares fit recomputed in this page.</p>
+    <div id="p4" class="chart tall"></div>
+    <p class="note" id="n4"></p>
+  </section>
+
+  <section>
+    <h2>5 &middot; The metric set</h2>
+    <p class="lede">Every value below is read from <code>marriage_stats.json</code>, written by the analysis notebook.</p>
+    <table id="metrics"></table>
+    <div class="warn" id="caveat"></div>
+  </section>
+
+  <section>
+    <h2>Static figures</h2>
+    <p class="figlinks">
+      <a href="figures/mr_f1_gradient.png">F1 gradient</a>
+      <a href="figures/mr_f2_trend.png">F2 national trend</a>
+      <a href="figures/mr_f3_gap.png">F3 decade gap</a>
+      <a href="figures/mr_f4_composition.png">F4 2024 composition</a>
+      <a href="CISC7204%20Assgn02%20-%20Revised%20Ideation%20-%20Marriage.ipynb">Analysis notebook</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  Sources: General Social Survey (NORC), 1972&ndash;2024 &middot; World Bank GDP per capita, USA,
+  constant 2015 US$ (<code>NY.GDP.PCAP.KD</code>). Numbers regenerate from the notebook;
+  this page only re-arranges them for the web.
+</footer>
+
+<script>
+const S = {"n_total":72087,"n_waves":35,"waves":[1972,1973,1974,1975,1976,1977,1978,1980,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1993,1994,1996,1998,2000,2002,2004,2006,2008,2010,2012,2014,2016,2018,2021,2022,2024],"status_n":{"married":37137,"widowed":6651,"divorced":9523,"separated":2416,"never married":16360},"pct_very_happy":{"married":38.8,"widowed":22.733,"divorced":18.566,"separated":15.522,"never married":19.59},"mean_h":{"married":2.3037,"widowed":2.0195,"divorced":1.9741,"separated":1.863,"never married":2.0018},"ci95":{"married":0.0063,"widowed":0.0158,"divorced":0.0126,"separated":0.0261,"never married":0.0096},"chi2":4513.74,"dof":8,"p":0.0,"cramers_v":0.1769,"ols_unadj":{"widowed":-0.2842,"divorced":-0.3297,"separated":-0.4407,"never married":-0.3019},"ols_unadj_p":{"widowed":3.5537903696932905e-253,"divorced":0.0,"separated":5.0027082492193824e-245,"never married":0.0},"ols_rsq":0.0614,"ols_adj":{"widowed":-0.2483,"divorced":-0.292,"separated":-0.4006,"never married":-0.2525},"ols_adj_p":{"widowed":6.707494828200255e-133,"divorced":0.0,"separated":7.563264817509718e-182,"never married":8.352157372283095e-305},"ols_adj_rsq":0.0705,"n_adj":64321,"cohen_d":0.4878,"odds_ratio":2.6022,"or_ci":[2.4904,2.7189],"boot_gap_ci":[18.4532,19.9779],"gap_pp":19.2091,"decades":[{"decade":"1970s","n":10613,"married_pct":40.612,"separated_pct":17.665,"gap_pp":22.947,"p":4.21487462655983e-118},{"decade":"1980s","n":14085,"married_pct":38.871,"separated_pct":15.741,"gap_pp":23.13,"p":5.425770784240583e-139},{"decade":"1990s","n":13131,"married_pct":40.697,"separated_pct":14.679,"gap_pp":26.018,"p":6.156084521195901e-187},{"decade":"2000s","n":10477,"married_pct":42.273,"separated_pct":16.138,"gap_pp":26.135,"p":1.476383153308629e-157},{"decade":"2010s","n":11728,"married_pct":40.51,"separated_pct":18.088,"gap_pp":22.422,"p":1.0858727271431776e-165},{"decade":"2020s","n":12053,"married_pct":29.083,"separated_pct":10.557,"gap_pp":18.526,"p":6.915293546700125e-162}],"binary":{"chi2":4307.1712,"dof":2,"p":0.0,"cramers_v":0.2444,"odds_ratio":2.596,"or_ci":[2.5101,2.6848]},"holdout":{"train_r2":0.0609,"test_r2":0.063},"yearly":[{"year":1972,"n":1606,"pct_very_happy":30.262,"share_married":72.042,"gdp":26798.5336},{"year":1973,"n":1500,"pct_very_happy":35.867,"share_married":71.6,"gdp":28042.5519},{"year":1974,"n":1480,"pct_very_happy":37.905,"share_married":71.892,"gdp":27637.2998},{"year":1975,"n":1485,"pct_very_happy":32.862,"share_married":67.205,"gdp":27309.8688},{"year":1976,"n":1499,"pct_very_happy":34.089,"share_married":64.977,"gdp":28509.1431},{"year":1977,"n":1527,"pct_very_happy":34.84,"share_married":63.785,"gdp":29528.9664},{"year":1978,"n":1516,"pct_very_happy":34.367,"share_married":62.929,"gdp":30834.9992},{"year":1980,"n":1462,"pct_very_happy":33.926,"share_married":60.602,"gdp":31081.6216},{"year":1982,"n":1855,"pct_very_happy":30.566,"share_married":53.477,"gdp":30696.0834},{"year":1983,"n":1573,"pct_very_happy":31.151,"share_married":60.903,"gdp":31810.9216},{"year":1984,"n":1445,"pct_very_happy":34.74,"share_married":56.332,"gdp":33818.8236},{"year":1985,"n":1530,"pct_very_happy":28.627,"share_married":56.863,"gdp":34918.1302},{"year":1986,"n":1449,"pct_very_happy":32.298,"share_married":56.591,"gdp":35794.8878},{"year":1987,"n":1779,"pct_very_happy":29.117,"share_married":50.59,"gdp":36701.9454},{"year":1988,"n":1466,"pct_very_happy":33.97,"share_married":53.547,"gdp":37889.3773},{"year":1989,"n":1526,"pct_very_happy":32.634,"share_married":55.177,"gdp":38911.5419},{"year":1990,"n":1360,"pct_very_happy":33.456,"share_married":53.015,"gdp":39200.0658},{"year":1991,"n":1504,"pct_very_happy":31.051,"share_married":53.191,"gdp":38637.8398},{"year":1993,"n":1600,"pct_very_happy":31.562,"share_married":53.562,"gdp":40002.4762},{"year":1994,"n":2977,"pct_very_happy":28.787,"share_married":51.562,"gdp":41106.9882},{"year":1996,"n":2885,"pct_very_happy":30.399,"share_married":47.903,"gdp":42783.8166},{"year":1998,"n":2805,"pct_very_happy":31.765,"share_married":47.665,"gdp":45596.4307},{"year":2000,"n":2776,"pct_very_happy":31.736,"share_married":45.821,"gdp":48616.2546},{"year":2002,"n":1369,"pct_very_happy":30.314,"share_married":44.12,"gdp":48967.3661},{"year":2004,"n":1337,"pct_very_happy":31.339,"share_married":50.785,"gdp":51348.3473},{"year":2006,"n":2985,"pct_very_happy":30.787,"share_married":47.337,"gdp":53596.3152},{"year":2008,"n":2010,"pct_very_happy":29.701,"share_married":48.209,"gdp":53703.9629},{"year":2010,"n":2038,"pct_very_happy":26.398,"share_married":43.474,"gdp":52812.683},{"year":2012,"n":1964,"pct_very_happy":30.193,"share_married":45.672,"gdp":54000.8411},{"year":2014,"n":2526,"pct_very_happy":31.077,"share_married":45.685,"gdp":55665.2411},{"year":2016,"n":2858,"pct_very_happy":28.202,"share_married":42.267,"gdp":57430.8499},{"year":2018,"n":2342,"pct_very_happy":29.889,"share_married":42.57,"gdp":59817.6557},{"year":2021,"n":4006,"pct_very_happy":19.521,"share_married":49.675,"gdp":63096.7856},{"year":2022,"n":4107,"pct_very_happy":21.329,"share_married":42.05,"gdp":64322.2333},{"year":2024,"n":3940,"pct_very_happy":20.152,"share_married":41.802,"gdp":66856.5132}],"share_married_first":{"year":1972,"value":72.042},"share_married_last":{"year":2024,"value":41.802},"pct_vh_first":{"year":1972,"value":30.262},"pct_vh_last":{"year":2024,"value":20.152},"gdp_first":{"year":1972,"value":26798.5336},"gdp_last":{"year":2024,"value":66856.5132},"gdp_ratio":2.4948,"tau_pre2022":-0.5038,"tau_pre2022_p":1.7978984791029803e-05,"era_chi2":770.7347,"era_dof":4,"era_p":1.6752546078924053e-165,"rho_share":0.6894,"rho_share_p":4.6546107412287524e-06,"rho_gdp":-0.684,"rho_gdp_p":5.888585376799201e-06};
+const STATUS = ["married", "widowed", "divorced", "separated", "never married"];
+const P = S.pct_very_happy, N = S.status_n, MH = S.mean_h, C = S.ci95;
+
+function pStr(p) {
+  if (p === 0) return "p < 1e-300";
+  if (p < 0.0001) return "p = " + p.toExponential(1);
+  return "p = " + p.toFixed(4);
+}
+function fmt(x, d) { return Number(x).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+/* ---------- header chips ---------- */
+(function chips() {
+  const items = [
+    [fmt(S.n_total, 0), "respondents"],
+    [S.n_waves, "GSS waves"],
+    [fmt(P["married"], 1) + "%", "married & very happy"],
+    [fmt(P["separated"], 1) + "%", "separated & very happy"],
+    ["χ²(" + S.dof + ") = " + fmt(S.chi2, 0), "status vs happiness"],
+    ["V = " + S.cramers_v.toFixed(3), "Cramer's V"],
+    ["OR " + S.odds_ratio.toFixed(2), "married vs never married"],
+    [fmt(S.share_married_first.value, 1) + "% → " + fmt(S.share_married_last.value, 1) + "%", "married, 1972 → 2024"]
+  ];
+  document.getElementById("chips").innerHTML = items.map(
+    ([v, k]) => '<div class="chip"><b>' + v + '</b><span>' + k + '</span></div>').join("");
+})();
+
+/* ---------- chart 1: gradient with binomial CI ---------- */
+(function gradient() {
+  const order = ["married", "widowed", "never married", "divorced", "separated"];
+  const pct = order.map(s => P[s]);
+  const ci = order.map(s => {
+    const p = P[s] / 100, n = N[s];
+    return 196 * Math.sqrt(p * (1 - p) / n);          // 1.96 * se, scaled below
+  });
+  Plotly.react("p1", [{
+    type: "bar",
+    x: order,
+    y: pct,
+    error_y: { type: "data", array: ci, visible: true, color: "#444", thickness: 1, width: 6 },
+    text: pct.map(v => v.toFixed(1) + "%"),
+    textposition: "outside",
+    marker: { color: order.map(s => s === "married" ? "#2a9d8f" : "#9fb8b3") },
+    customdata: order.map(s => [N[s], MH[s], C[s]]),
+    hovertemplate: "<b>%{x}</b><br>% very happy: %{y:.1f}%<br>n = %{customdata[0]:,}" +
+                   "<br>mean happiness: %{customdata[1]:.3f} (1-3)" +
+                   "<br>95% CI on the mean: &plusmn;%{customdata[2]:.4f}<extra></extra>"
+  }], {
+    title: { text: "% saying they are \u201cvery happy\u201d, by marital status (pooled 1972\u20132024)" },
+    yaxis: { title: "% very happy", range: [0, 46] },
+    margin: { l: 60, r: 20, t: 50, b: 60 }, template: "plotly_white", showlegend: false
+  }, { responsive: true, displayModeBar: false });
+
+  document.getElementById("n1").innerHTML =
+    "The gradient is present in every wave and is not marginal: χ²(" + S.dof + ") = " +
+    fmt(S.chi2, 0) + ", " + pStr(S.p) + ", Cramer's V = " + S.cramers_v.toFixed(3) +
+    ". Married respondents are " + S.odds_ratio.toFixed(2) + " times as likely to say they are very happy as " +
+    "never-married respondents (95% CI " + S.or_ci[0].toFixed(2) + "–" + S.or_ci[1].toFixed(2) +
+    "); the gap is " + fmt(S.gap_pp, 1) + " percentage points, bootstrap 95% CI " +
+    fmt(S.boot_gap_ci[0], 1) + "–" + fmt(S.boot_gap_ci[1], 1) + " points.";
+})();
+
+/* ---------- shared helpers for charts 2 and 4 ---------- */
+function rows(excludePandemic) {
+  return S.yearly.filter(d => !excludePandemic || d.year < 2021);
+}
+function pearson(x, y) {
+  const n = x.length, mx = x.reduce((a, b) => a + b, 0) / n, my = y.reduce((a, b) => a + b, 0) / n;
+  let sxy = 0, sxx = 0, syy = 0;
+  for (let i = 0; i < n; i++) { const dx = x[i] - mx, dy = y[i] - my; sxy += dx * dy; sxx += dx * dx; syy += dy * dy; }
+  return sxy / Math.sqrt(sxx * syy);
+}
+function ranks(v) {
+  const idx = v.map((x, i) => [x, i]).sort((a, b) => a[0] - b[0]);
+  const r = new Array(v.length);
+  for (let i = 0; i < idx.length; i++) r[idx[i][1]] = i + 1;
+  return r;
+}
+function spearman(x, y) { return pearson(ranks(x), ranks(y)); }
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function permP(x, y, observed, draws) {
+  const rnd = mulberry32(42), ys = y.slice();
+  let hits = 0;
+  for (let k = 0; k < draws; k++) {
+    for (let i = ys.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const t = ys[i]; ys[i] = ys[j]; ys[j] = t; }
+    if (Math.abs(spearman(x, ys)) >= Math.abs(observed) - 1e-12) hits++;
+  }
+  return (hits + 1) / (draws + 1);
+}
+function ols(x, y) {
+  const n = x.length, mx = x.reduce((a, b) => a + b, 0) / n, my = y.reduce((a, b) => a + b, 0) / n;
+  let sxy = 0, sxx = 0;
+  for (let i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; }
+  const b = sxy / sxx;
+  return { b: b, a: my - b * mx };
+}
+
+/* ---------- chart 2: national trend, right axis selectable ---------- */
+let rightAxis = "share";
+function drawTrend() {
+  const exclude = document.getElementById("exclude").checked;
+  const d = rows(exclude);
+  const years = d.map(r => r.year);
+  const left = {
+    type: "scatter", mode: "lines+markers", name: "% very happy",
+    x: years, y: d.map(r => r.pct_very_happy),
+    line: { color: "#c1121f", width: 2 }, marker: { size: 5 },
+    hovertemplate: "%{x}: %{y:.1f}% very happy<extra></extra>"
+  };
+  const right = rightAxis === "share"
+    ? { type: "scatter", mode: "lines+markers", name: "share married", yaxis: "y2",
+        x: years, y: d.map(r => r.share_married),
+        line: { color: "#003049", width: 2 }, marker: { size: 5, symbol: "square" },
+        hovertemplate: "%{x}: %{y:.1f}% married<extra></extra>" }
+    : { type: "scatter", mode: "lines+markers", name: "GDP per capita", yaxis: "y2",
+        x: years, y: d.map(r => r.gdp / 1000),
+        line: { color: "#003049", width: 2 }, marker: { size: 5, symbol: "diamond" },
+        hovertemplate: "%{x}: $%{y:,.1f}k per person<extra></extra>" };
+
+  Plotly.react("p2", [left, right], {
+    title: { text: "% very happy against " + (rightAxis === "share" ? "the share who were married" : "real GDP per capita") },
+    xaxis: { title: "survey year" },
+    yaxis: { title: "% very happy", color: "#c1121f", range: [15, 42] },
+    yaxis2: { title: rightAxis === "share" ? "% married" : "GDP per capita (thousands, 2015 US$)",
+              color: "#003049", overlaying: "y", side: "right",
+              range: rightAxis === "share" ? [35, 78] : [20, 72] },
+    legend: { orientation: "h", y: 1.12, x: 0 },
+    margin: { l: 60, r: 70, t: 70, b: 50 }, template: "plotly_white"
+  }, { responsive: true, displayModeBar: false });
+
+  const rho = spearman(d.map(r => r.share_married), d.map(r => r.pct_very_happy));
+  const rhoG = spearman(d.map(r => r.gdp), d.map(r => r.pct_very_happy));
+  const f = d[0], l = d[d.length - 1];
+  document.getElementById("n2").innerHTML =
+    "From " + f.year + " to " + l.year + ": " + f.share_married.toFixed(1) + "% → " + l.share_married.toFixed(1) +
+    "% married and " + f.pct_very_happy.toFixed(1) + "% → " + l.pct_very_happy.toFixed(1) +
+    "% very happy, while real GDP per capita rose " + S.gdp_ratio.toFixed(2) + "\u00d7. " +
+    "Across the " + d.length + " waves shown, Spearman(share married, % very happy) = " + rho.toFixed(3) +
+    " and Spearman(GDP per capita, % very happy) = " + rhoG.toFixed(3) + ". " +
+    "The notebook reports " + S.rho_share.toFixed(3) + " (" + pStr(S.rho_share_p) + ") for the full set.";
+}
+document.querySelectorAll('input[name="rightaxis"]').forEach(el =>
+  el.addEventListener("change", e => { rightAxis = e.target.value; drawTrend(); }));
+
+/* ---------- chart 3: decade gap ---------- */
+(function decades() {
+  const dd = S.decades;
+  Plotly.react("p3", [
+    { type: "bar", name: "married", x: dd.map(d => d.decade), y: dd.map(d => d.married_pct),
+      marker: { color: "#2a9d8f" }, text: dd.map(d => d.married_pct.toFixed(1)), textposition: "outside",
+      hovertemplate: "%{x}, married: %{y:.1f}% very happy<extra></extra>" },
+    { type: "bar", name: "separated", x: dd.map(d => d.decade), y: dd.map(d => d.separated_pct),
+      marker: { color: "#c1121f" }, text: dd.map(d => d.separated_pct.toFixed(1)), textposition: "outside",
+      hovertemplate: "%{x}, separated: %{y:.1f}% very happy<extra></extra>" }
+  ], {
+    barmode: "group",
+    title: { text: "% very happy by decade: married vs separated" },
+    yaxis: { title: "% very happy", range: [0, 50] },
+    legend: { orientation: "h", y: 1.12, x: 0 },
+    margin: { l: 60, r: 20, t: 70, b: 50 }, template: "plotly_white"
+  }, { responsive: true, displayModeBar: false });
+
+  const minGap = Math.min.apply(null, dd.map(d => d.gap_pp));
+  document.getElementById("n3").innerHTML =
+    "The gap runs from " + minGap.toFixed(1) + " to " + Math.max.apply(null, dd.map(d => d.gap_pp)).toFixed(1) +
+    " percentage points, and the five-status association is significant inside every decade " +
+    "(largest " + pStr(Math.max.apply(null, dd.map(d => d.p))) + "). The 2020s are lower on both bars: the " +
+    "pandemic-era waves report less happiness overall, but the ordering by status does not change.";
+})();
+
+/* ---------- chart 4: scatter of the two national series ---------- */
+let scatterStats = { rho: 0, p: 0, b: 0 };
+function drawScatter() {
+  const exclude = document.getElementById("exclude").checked;
+  const d = rows(exclude);
+  const xs = d.map(r => r.share_married), ys = d.map(r => r.pct_very_happy);
+  const rho = spearman(xs, ys);
+  const p = permP(xs, ys, rho, 20000);
+  const fit = ols(xs, ys);
+  scatterStats = { rho: rho, p: p, b: fit.b };
+
+  const lineX = [Math.min.apply(null, xs), Math.max.apply(null, xs)];
+  Plotly.react("p4", [
+    { type: "scatter", mode: "markers", name: "survey wave",
+      x: xs, y: ys,
+      text: d.map(r => r.year),
+      marker: { size: 9, color: d.map(r => r.year), colorscale: "Viridis", showscale: true,
+                colorbar: { title: "year", thickness: 10 } },
+      customdata: d.map(r => [r.n, r.gdp]),
+      hovertemplate: "<b>%{text}</b><br>%{x:.1f}% married<br>%{y:.1f}% very happy" +
+                     "<br>n = %{customdata[0]:,}<br>GDP pc $%{customdata[1]:,.0f}<extra></extra>" },
+    { type: "scatter", mode: "lines", name: "OLS fit", x: lineX,
+      y: lineX.map(x => fit.a + fit.b * x), line: { color: "#003049", width: 2, dash: "dash" },
+      hoverinfo: "skip" }
+  ], {
+    title: { text: "Share married against share very happy, one point per wave" },
+    xaxis: { title: "% of respondents who were married" },
+    yaxis: { title: "% very happy" },
+    legend: { orientation: "h", y: 1.12, x: 0 },
+    margin: { l: 60, r: 20, t: 70, b: 55 }, template: "plotly_white"
+  }, { responsive: true, displayModeBar: false });
+
+  document.getElementById("n4").innerHTML =
+    "Spearman \u03c1 = " + rho.toFixed(3) + " (" + pStr(p) + ", 20,000-draw permutation test); " +
+    "OLS slope = " + fit.b.toFixed(3) + " percentage points of very happy per percentage point of married. " +
+    "Both are associational: a third factor, such as age structure or the survey-mode change after 2020, " +
+    "can move both series.";
+}
+document.getElementById("exclude").addEventListener("change", () => { drawTrend(); drawScatter(); });
+
+/* ---------- metric table ---------- */
+(function metrics() {
+  const rows = [
+    ["Respondents / waves", fmt(S.n_total, 0) + " / " + S.n_waves],
+    ["% very happy: married, widowed, divorced, separated, never married",
+      [P["married"], P["widowed"], P["divorced"], P["separated"], P["never married"]].map(v => v.toFixed(1) + "%").join(" &middot; ")],
+    ["Status vs happiness", "\u03c7\u00B2(" + S.dof + ") = " + fmt(S.chi2, 1) + ", " + pStr(S.p)],
+    ["Cramer's V", S.cramers_v.toFixed(3)],
+    ["Odds ratio, very happy (married vs never married)", S.odds_ratio.toFixed(2) + " [" + S.or_ci[0].toFixed(2) + ", " + S.or_ci[1].toFixed(2) + "]"],
+    ["Cohen's d (mean happiness)", S.cohen_d.toFixed(3)],
+    ["Gap in % very happy", fmt(S.gap_pp, 1) + " pp [" + fmt(S.boot_gap_ci[0], 1) + ", " + fmt(S.boot_gap_ci[1], 1) + "]"],
+    ["OLS, reference married: widowed / divorced / separated / never",
+      [S.ols_unadj["widowed"], S.ols_unadj["divorced"], S.ols_unadj["separated"], S.ols_unadj["never married"]]
+        .map(v => v.toFixed(3)).join(" / ") + "  (R\u00B2 = " + S.ols_rsq.toFixed(3) + ")"],
+    ["Adjusted for age, sex, income (n = " + fmt(S.n_adj, 0) + ")",
+      [S.ols_adj["widowed"], S.ols_adj["divorced"], S.ols_adj["separated"], S.ols_adj["never married"]]
+        .map(v => v.toFixed(3)).join(" / ") + "  (R\u00B2 = " + S.ols_adj_rsq.toFixed(3) + ")"],
+    ["Never-married coefficient, adjusted", S.ols_adj["never married"].toFixed(3) + ", " + pStr(S.ols_adj_p["never married"])],
+    ["Binary cut (married vs everyone else)", "\u03c7\u00B2(" + S.binary.dof + ") = " + fmt(S.binary.chi2, 1) + ", V = " +
+      S.binary.cramers_v.toFixed(3) + ", OR = " + S.binary.odds_ratio.toFixed(2)],
+    ["80/20 hold-out", "train R\u00B2 = " + S.holdout.train_r2.toFixed(4) + ", test R\u00B2 = " + S.holdout.test_r2.toFixed(4)],
+    ["Share married, first to last wave", S.share_married_first.year + " " + S.share_married_first.value.toFixed(1) + "% \u2192 " +
+      S.share_married_last.year + " " + S.share_married_last.value.toFixed(1) + "%"],
+    ["% very happy, first to last wave", S.pct_vh_first.year + " " + S.pct_vh_first.value.toFixed(1) + "% \u2192 " +
+      S.pct_vh_last.year + " " + S.pct_vh_last.value.toFixed(1) + "%"],
+    ["GDP per capita, first to last wave", "$" + fmt(S.gdp_first.value, 0) + " \u2192 $" + fmt(S.gdp_last.value, 0) +
+      " (" + S.gdp_ratio.toFixed(2) + "\u00d7)"],
+    ["Spearman(share married, % very happy)", S.rho_share.toFixed(3) + ", " + pStr(S.rho_share_p)],
+    ["Spearman(GDP per capita, % very happy)", S.rho_gdp.toFixed(3) + ", " + pStr(S.rho_gdp_p)],
+    ["Kendall tau, pre-2022 waves", S.tau_pre2022.toFixed(3) + ", " + pStr(S.tau_pre2022_p)],
+    ["Happiness across eras", "\u03c7\u00B2(" + S.era_dof + ") = " + fmt(S.era_chi2, 1) + ", " + pStr(S.era_p)]
+  ];
+  document.getElementById("metrics").innerHTML =
+    "<thead><tr><th>measure</th><th>value</th></tr></thead><tbody>" +
+    rows.map(([k, v]) => '<tr><td>' + k + '</td><td class="num">' + v + '</td></tr>').join("") + "</tbody>";
+
+  document.getElementById("caveat").innerHTML =
+    "<b>Association, not causation.</b> These data cannot show that marrying makes anyone happier: " +
+    "people who are already happier may be more likely to marry and to stay married, and widowhood, " +
+    "divorce and separation follow events that depress well-being on their own. The adjusted model " +
+    "removes part of the age, sex and income story, not the selection story.";
+})();
+
+drawTrend();
+drawScatter();
+</script>
+</body>
+</html>
