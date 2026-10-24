@@ -21,12 +21,12 @@ OUTPUT_FOLDER = Path("screenshots")
 # Set to "" to use the notebook's own filename instead.
 # (If you process several notebooks at once, use "" so files don't
 #  overwrite each other.)
-OUTPUT_PREFIX = "Mod03_L1"
+OUTPUT_PREFIX = "Mod03_L2"
 
 # Screenshots start at the first Markdown heading containing this text
 # (case-insensitive). Everything before it is skipped.
 # Set to "" to start from the top of the notebook.
-START_HEADING = "Import libraries"
+START_HEADING = "Import"
 
 # Which Markdown heading levels start a new screenshot.
 #   None      = automatic: every heading at the SAME level as the start
@@ -35,6 +35,10 @@ START_HEADING = "Import libraries"
 #               "##" (and "#") heading starts a new screenshot.
 #   [1,2,3]   = split on exactly these levels (1 = "#", 2 = "##", ...).
 #   [1,2,3,4,5,6] = split on every heading.
+# Merge any section shorter than this into the following one, so that no
+# screenshot is too small to read (the assignment penalises that).
+MIN_GROUP_HEIGHT = 420
+
 SECTION_HEADING_LEVELS = None
 
 # ==================================================
@@ -152,6 +156,23 @@ GROUP_CELLS_JS = r"""
         }
     }
 
+    // Merge any group that would produce an unreadably short screenshot into the
+    // next group, so every capture carries a heading plus its code and output.
+    const minHeight = config.minHeight || 0;
+
+    if (minHeight > 0 && groups.length > 1) {
+        for (let i = groups.length - 2; i >= 0; i--) {
+            const rect = groups[i][0].getBoundingClientRect();
+            const last = groups[i][groups[i].length - 1].getBoundingClientRect();
+            const height = (last.bottom - rect.top);
+
+            if (height < minHeight) {
+                groups[i + 1] = groups[i].concat(groups[i + 1]);
+                groups.splice(i, 1);
+            }
+        }
+    }
+
     // Wrap each section so it can be screenshotted as its own element.
     groups.forEach(group => {
         const first = group[0];
@@ -258,6 +279,7 @@ async def capture_notebook(browser, notebook_path):
                 {
                     "levels": SECTION_HEADING_LEVELS,
                     "startHeading": START_HEADING,
+                    "minHeight": MIN_GROUP_HEIGHT,
                 }
             )
 
@@ -300,7 +322,7 @@ async def main():
     # Find notebooks in this folder only, not nested folders.
     notebooks = sorted(
         path
-        for path in NOTEBOOK_FOLDER.glob("*.ipynb")
+        for path in NOTEBOOK_FOLDER.glob("CISC7204 Assgn02 Module 03 - Lab02.ipynb")
         if path.is_file()
     )
 
